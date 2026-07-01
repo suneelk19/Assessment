@@ -1,0 +1,77 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WriteSphere</title>
+</head>
+<body>
+
+    {% if form.instance.pk %}
+        <h2>Edit Post</h2>
+    {% else %}
+        <h2>Create New Post</h2>
+    {% endif %}
+
+    <hr>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            {% if form.instance.pk %}
+                Update Post
+            {% else %}
+                Create Post
+            {% endif %}
+        </button>
+    </form>
+
+    <br>
+
+    <a href="{% url 'home' %}">🏠 Back to Home</a>
+
+</body>
+</html> {% endcomment %}
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+
+        {% if form.instance.pk %}
+            <h2>Edit Post</h2>
+        {% else %}
+            <h2>Create New Post</h2>
+        {% endif %}
+
+        <hr>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success">
+                {% if form.instance.pk %}
+                    Update Post
+                {% else %}
+                    Create Post
+                {% endif %}
+            </button>
+
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                Back to Home
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
